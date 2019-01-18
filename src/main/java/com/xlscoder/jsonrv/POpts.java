@@ -54,6 +54,13 @@ public class POpts {
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine line = parser.parse( options, args );
+
+            if (args.length == 0) {
+                HelpFormatter formatter = new HelpFormatter();
+                formatter.printHelp( "jsonrv", options );
+                System.exit(0);
+            }
+
             schemaFile = Lang.filenameFromParameter(line, "schema", "Schema file", true);
             jsonFile = Lang.filenameFromParameter(line, "json", "JSON file", true);
             excelFile = Lang.filenameFromParameter(line, "excel", "Directory with Excel files", true);
