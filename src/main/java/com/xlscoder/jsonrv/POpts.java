@@ -43,13 +43,13 @@ public class POpts {
     public POpts(String[] args) {
         Options options = new Options();
         options.addOption("s", "schema",true,
-                "CSV schema file. Line: filename,conferenceName,list,of,personal,data,fields");
+                "[required, file should exist on the path] CSV schema file. Line: filename,conferenceName,list,of,personal,data,fields");
         options.addOption("j", "json",true,
-                "JSON file.");
+                "[required, file should exist on the path] JSON file.");
         options.addOption("e", "excel",true,
-                "Directory with Excel files.");
+                "[required, file should exist on the path] Directory with Excel files.");
         options.addOption("o", "out",true,
-                "Output JSON file.");
+                "[required, file will be generated] Output JSON file.");
 
         CommandLineParser parser = new DefaultParser();
         try {

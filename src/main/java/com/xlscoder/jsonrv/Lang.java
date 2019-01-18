@@ -1,6 +1,7 @@
 package com.xlscoder.jsonrv;
 
 import org.apache.commons.cli.CommandLine;
+import org.apache.commons.lang3.SystemUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -35,7 +36,14 @@ public class Lang {
     public static String filenameFromParameter(CommandLine line, String param, String meaning, boolean fileShouldExist) {
         String result = line.getOptionValue(param);
         if (fileShouldExist) {
-            result = Lang.expandPathUsingBash(result);
+            if (SystemUtils.IS_OS_WINDOWS) {
+                // Ничего не поделаешь, это Windows.
+                // Надеяться на наличие Bash в PATH бессмысленно.
+                result = Lang.expandPathSimple(result);
+            } else {
+                result = Lang.expandPathUsingBash(result);
+            }
+
         } else {
             result = Lang.expandPathSimple(result);
         }
